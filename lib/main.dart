@@ -78,12 +78,15 @@ class _ListViewPageState extends State<ListViewPage> {
             ),
             child: Column(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child:Image.asset(
-                    image,
-                    width:200,
-                    height:200,
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child:Image.asset(
+                      image,
+                      width:200,
+                      height:200,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -107,14 +110,20 @@ class _ListViewPageState extends State<ListViewPage> {
                     textAlign: TextAlign.center,
                   )
                 ),
-                ElevatedButton.icon(
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0),
+                  child: ElevatedButton.icon(
 
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.close),
-                  label: const Text('close'),
-                  ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.close),
+                    label: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: const Text('close'),
+                    ),
+                    ),
+                ),
               ],
             )
           )
@@ -139,7 +148,7 @@ class _ListViewPageState extends State<ListViewPage> {
       body : ListView.builder(
         itemCount: titleList.length,
         itemBuilder: (context, index){
-          return GestureDetector(
+          return GestureDetector(  //InkWell 위젯 사용가능 - 잉크가 퍼지는듯한 애니메이션
             onTap: (){
               print(titleList[index]); //print 밑에 밑줄이 있으면 debutPrint 사용
               showPopup(context, titleList[index], imageList[index],
