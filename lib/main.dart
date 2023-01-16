@@ -64,6 +64,65 @@ class _ListViewPageState extends State<ListViewPage> {
     '10. There are different types of careers you can pursue in your life. Which one will it be?'
   ];
 
+  void showPopup(context, title, image, description){
+    showDialog(
+      context: context,
+      builder: (context){
+        return Dialog(
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.7,
+            height: 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child:Image.asset(
+                    image,
+                    width:200,
+                    height:200,
+                  ),
+                ),
+                const SizedBox(
+                  height:10,
+                ),
+                Text(
+                  title,
+                  style:TextStyle(
+                  fontSize:25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey), 
+                ),Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    description,
+                    maxLines: 3,
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey[500]
+                    ),
+                    textAlign: TextAlign.center,
+                  )
+                ),
+                ElevatedButton.icon(
+
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.close),
+                  label: const Text('close'),
+                  ),
+              ],
+            )
+          )
+        );
+      }
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,40 +139,47 @@ class _ListViewPageState extends State<ListViewPage> {
       body : ListView.builder(
         itemCount: titleList.length,
         itemBuilder: (context, index){
-          return Card(
-            child: Row(
-              children: [
-                SizedBox(
-                width: 100,
-                height : 100,
-                child: Image.asset(imageList[index]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      Text(titleList[index],
-                      style: const TextStyle(
-                        fontSize:22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: width,
-                        child: Text(
-                          description[index],
-                          style: TextStyle(
-                           fontSize: 15,
-                           color:Colors.grey[500] 
-                          ))
-                      )
-                      
-                    ],))
-              ],
-              )
+          return GestureDetector(
+            onTap: (){
+              print(titleList[index]); //print 밑에 밑줄이 있으면 debutPrint 사용
+              showPopup(context, titleList[index], imageList[index],
+                        description[index]);
+            },
+            child: Card(
+              child: Row(
+                children: [
+                  SizedBox(
+                  width: 100,
+                  height : 100,
+                  child: Image.asset(imageList[index]),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Text(titleList[index],
+                        style: const TextStyle(
+                          fontSize:22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          width: width,
+                          child: Text(
+                            description[index],
+                            style: TextStyle(
+                             fontSize: 15,
+                             color:Colors.grey[500] 
+                            ))
+                        )
+                        
+                      ],))
+                ],
+                )
+            ),
           );
         }
         )
