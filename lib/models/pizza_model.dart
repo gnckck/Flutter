@@ -16,7 +16,7 @@ class Pizza extends Equatable {
   List<Object?> get props => [id, name, image];
   // 피자 클래스 내에서 블록의 상태를 비교하는데 사용됨
 
-  static List<Pizza> pizzas = [
+ static List<Pizza> pizzas = [
     Pizza(
       id: '0',
       name: 'Pizza',
